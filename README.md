@@ -1,2 +1,2 @@
-# CP468_A2
+# CP468 A2
 Assignment 2 for CP468
