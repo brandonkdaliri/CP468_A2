@@ -42,14 +42,14 @@ def fnKNN(file, k, accuracy):
   # print results
   print(f'kNN with {accuracy * 100}% accuracy and k = {k}')
   print(f'  Total Data Points: {len(testing_set) + len(training_set)}')
-  print(f'  Testing Set: {len(testing_set)}')
-  print(f'  Training Set: {correct}/{len(testing_set)} estimated correctly')
+  print(f'  Training Set: {len(training_set)}')
+  print(f'  Testing Set: {correct}/{len(testing_set)} estimated correctly')
 
   return
 
 def _knn(point, training_set, k):
   if len(training_set) == 0:
-    return
+    return -1
 
   dist = []
   for test_point in training_set:
@@ -59,12 +59,12 @@ def _knn(point, training_set, k):
   if k > len(dist):
     k = len(dist)
 
-  dist.sort
+  dist.sort(key= lambda dist : dist[0])
 
   type_0 = 0
   type_1 = 0
   for i in range(k):
-    if dist[i] == 0:
+    if dist[i][1] == 0:
       type_0 += 1
     else:
       type_1 += 1
@@ -99,13 +99,13 @@ def main():
   p.plot(blueX, blueY, 'bo')
   p.plot(redX, redY, 'ro')
 
-  for k in range(1, 4):
+  for k in range(1, 5):
     fnKNN(dataset, k, 0.9)
     print('-' * 40)
     fnKNN(dataset, k, 0.7)
     print('-' * 40)
     fnKNN(dataset, k, 0.6)
-    print('=' * 40)
+    print('\n' + '=' * 40 + '\n')
   
   p.show()
   return
