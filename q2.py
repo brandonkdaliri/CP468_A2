@@ -22,6 +22,8 @@ def main():
 
   p.show()
 
+# Classifies data using the first two points as centroids.
+# Repeats until centroids no longer change.
 def kmeans(file, k):
   file.seek(0)
   centroids = []
@@ -57,6 +59,7 @@ def kmeans(file, k):
       colour = 'black'
     print(f'Cluster {i} ({colour}): {cluster_count[i]}')
 
+# kmeans helper function
 def _kmeans(centroids, testing_set, k):
   flag = True
   while flag:
@@ -93,11 +96,10 @@ def _kmeans(centroids, testing_set, k):
     # if no new centroid, then exit 
     if matches == k:
       flag = False
-
+      print(f"kMeans Algorithm with k = {k}")
       print(f'Final centroids:')
       for centroid in centroids:
         print(centroid)
-      
 
   return testing_set
   

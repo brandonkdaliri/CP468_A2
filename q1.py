@@ -14,7 +14,8 @@ def euclidean_distance(v1, v2, n = None):
   for i in range(n):
     distance += (v1[i] - v2[i])**2
   return math.sqrt(distance)
-  
+
+# Runs the kNN test on a set of data read in from a csv file
 def fnKNN(file, k, accuracy):
   file.seek(0)
   training_set = []
@@ -47,10 +48,12 @@ def fnKNN(file, k, accuracy):
 
   return
 
+# fnKNN helper method
 def _knn(point, training_set, k):
   if len(training_set) == 0:
     return -1
 
+  # Calculate Euclidean distance between point and test_point
   dist = []
   for test_point in training_set:
     edist = euclidean_distance(point, test_point, 2)
@@ -61,6 +64,7 @@ def _knn(point, training_set, k):
 
   dist.sort(key= lambda dist : dist[0])
 
+  # Count total of type 0 and type 1
   type_0 = 0
   type_1 = 0
   for i in range(k):
@@ -69,6 +73,7 @@ def _knn(point, training_set, k):
     else:
       type_1 += 1
   
+  # Determine which type had a higher count
   if type_0 > type_1:
     return 0
   elif type_0 < type_1:
